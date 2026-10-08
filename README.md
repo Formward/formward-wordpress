@@ -41,8 +41,8 @@ Submissions are processed on servers in Sweden; submitter IP addresses are pseud
 WordPress expects the plugin files inside a folder named after the slug (`formward-forms`):
 
 ```bash
-mkdir -p build/formward-forms-forms-forms-forms
-cp formward-forms.php readme.txt build/formward-forms-forms-forms-forms/
+mkdir -p build/formward-forms-forms-forms-forms-forms
+cp formward-forms.php readme.txt build/formward-forms-forms-forms-forms-forms/
 cd build && zip -r formward-forms.zip formward-forms
 ```
 

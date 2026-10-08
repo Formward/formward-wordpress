@@ -37,7 +37,7 @@ This plugin is a thin, open-source client. It stores only your Form ID, endpoint
 == Installation ==
 
 1. Create a form in your Formward dashboard at [formward.eu](https://formward.eu) and copy its **Form ID**.
-2. Upload the `formward` folder to `/wp-content/plugins/`, or install the ZIP from **Plugins → Add New → Upload Plugin**.
+2. Upload the `formward-forms` folder to `/wp-content/plugins/`, or install the ZIP from **Plugins → Add New → Upload Plugin**.
 3. Activate **Formward Forms** through the **Plugins** menu in WordPress.
 4. Go to **Settings → Formward** and paste your **Form ID** (leave the endpoint base as the default unless Formward gave you a custom one). Save.
 5. Optional: create a read-only **API key** in your Formward dashboard under **API keys** (scopes `forms:read` and `submissions:read`) and paste it into the **Formward API key** field on the same settings screen. This unlocks the **Formward → Forms** and **Formward → Submissions** admin pages so you can browse your forms and recent submissions inside WordPress.
