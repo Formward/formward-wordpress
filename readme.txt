@@ -96,6 +96,9 @@ No. The plugin outputs a plain HTML form. There are no analytics or marketing sc
 
 == Upgrade Notice ==
 
+= 0.2.1 =
+First WordPress.org release. The main plugin file is now formward-forms.php. If you installed 0.2.0 by hand from GitHub, deactivate and delete that copy before installing 0.2.1, then reactivate; WordPress does not remap a renamed main file on upgrade. Settings and the shortcode are unchanged.
+
 = 0.2.0 =
 Adds an optional read-only API key so you can browse your forms and recent submissions inside WP admin. The shortcode is unchanged.
 
