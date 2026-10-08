@@ -34,7 +34,7 @@ if ( ! defined( 'FORMWARD_DEFAULT_ENDPOINT' ) ) {
  * different host from the public form-submission endpoint above.
  */
 if ( ! defined( 'FORMWARD_DEFAULT_APP_BASE' ) ) {
-	define( 'FORMWARD_DEFAULT_APP_BASE', 'https://app.formward.eu' );
+	define( 'FORMWARD_DEFAULT_APP_BASE', 'https://formward.eu' );
 }
 
 /**
