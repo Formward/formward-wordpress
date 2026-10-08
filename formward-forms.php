@@ -945,7 +945,7 @@ function formward_render_settings_page() {
 		<form action="options.php" method="post">
 			<?php
 			settings_fields( 'formward_settings' );
-			do_settings_sections( 'formward-forms' );
+			do_settings_sections( 'formward' );
 			submit_button();
 			?>
 		</form>
