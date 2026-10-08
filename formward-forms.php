@@ -1,16 +1,16 @@
 <?php
 /**
  * Plugin Name:       Formward Forms
- * Plugin URI:        https://formward.eu
+ * Plugin URI:        https://formward.eu/frameworks/wordpress
  * Description:       Add EU-hosted, GDPR-clean contact forms to WordPress with a simple [formward_form] shortcode. Submissions are processed on servers in Sweden. No tracking, no US data transfer.
- * Version:           0.2.0
+ * Version:           0.2.1
  * Requires at least: 5.8
  * Requires PHP:      7.4
  * Author:            Formward
  * Author URI:        https://formward.eu
  * License:           GPLv2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       formward
+ * Text Domain:       formward-forms
  *
  * @package Formward
  */
@@ -64,8 +64,8 @@ if ( ! defined( 'FORMWARD_OPT_APP_BASE' ) ) {
  */
 function formward_add_settings_page() {
 	add_options_page(
-		__( 'Formward', 'formward' ),
-		__( 'Formward', 'formward' ),
+		__( 'Formward', 'formward-forms' ),
+		__( 'Formward', 'formward-forms' ),
 		'manage_options',
 		'formward',
 		'formward_render_settings_page'
@@ -121,14 +121,14 @@ function formward_register_settings() {
 
 	add_settings_section(
 		'formward_main_section',
-		__( 'Formward settings', 'formward' ),
+		__( 'Formward settings', 'formward-forms' ),
 		'formward_settings_section_intro',
 		'formward'
 	);
 
 	add_settings_field(
 		FORMWARD_OPT_FORM_ID,
-		__( 'Default Form ID', 'formward' ),
+		__( 'Default Form ID', 'formward-forms' ),
 		'formward_field_form_id',
 		'formward',
 		'formward_main_section'
@@ -136,7 +136,7 @@ function formward_register_settings() {
 
 	add_settings_field(
 		FORMWARD_OPT_ENDPOINT,
-		__( 'Endpoint base', 'formward' ),
+		__( 'Endpoint base', 'formward-forms' ),
 		'formward_field_endpoint',
 		'formward',
 		'formward_main_section'
@@ -144,7 +144,7 @@ function formward_register_settings() {
 
 	add_settings_field(
 		FORMWARD_OPT_API_KEY,
-		__( 'Formward API key', 'formward' ),
+		__( 'Formward API key', 'formward-forms' ),
 		'formward_field_api_key',
 		'formward',
 		'formward_main_section'
@@ -152,7 +152,7 @@ function formward_register_settings() {
 
 	add_settings_field(
 		FORMWARD_OPT_APP_BASE,
-		__( 'API base URL', 'formward' ),
+		__( 'API base URL', 'formward-forms' ),
 		'formward_field_app_base',
 		'formward',
 		'formward_main_section'
@@ -258,7 +258,7 @@ function formward_sanitize_app_base( $value ) {
 function formward_settings_section_intro() {
 	echo '<p>' . esc_html__(
 		'Formward is an EU-hosted, GDPR-clean form backend (servers in Sweden). Create a form at formward.eu, copy its Form ID, and paste it below. Then drop the [formward_form] shortcode on any page or post.',
-		'formward'
+		'formward-forms'
 	) . '</p>';
 }
 
@@ -279,7 +279,7 @@ function formward_field_form_id() {
 		autocomplete="off"
 	/>
 	<p class="description">
-		<?php esc_html_e( 'Your default Formward Form ID. The shortcode "id" attribute overrides this per form.', 'formward' ); ?>
+		<?php esc_html_e( 'Your default Formward Form ID. The shortcode "id" attribute overrides this per form.', 'formward-forms' ); ?>
 	</p>
 	<?php
 }
@@ -301,7 +301,7 @@ function formward_field_endpoint() {
 		placeholder="<?php echo esc_attr( FORMWARD_DEFAULT_ENDPOINT ); ?>"
 	/>
 	<p class="description">
-		<?php esc_html_e( 'Optional. Leave as the default unless Formward gives you a custom endpoint. Submissions post to <base>/f/<form-id>.', 'formward' ); ?>
+		<?php esc_html_e( 'Optional. Leave as the default unless Formward gives you a custom endpoint. Submissions post to <base>/f/<form-id>.', 'formward-forms' ); ?>
 	</p>
 	<?php
 }
@@ -329,7 +329,7 @@ function formward_field_api_key() {
 	<p class="description">
 		<?php
 		echo wp_kses(
-			__( 'Create a key under <strong>Dashboard → API keys</strong> at formward.eu (scopes <code>forms:read</code> and <code>submissions:read</code>) and paste it here. It lets this plugin list your forms and recent submissions in WP admin. Read-only — it is never shown to site visitors.', 'formward' ),
+			__( 'Create a key under <strong>Dashboard → API keys</strong> at formward.eu (scopes <code>forms:read</code> and <code>submissions:read</code>) and paste it here. It lets this plugin list your forms and recent submissions in WP admin. Read-only. It is never shown to site visitors.', 'formward-forms' ),
 			array(
 				'strong' => array(),
 				'code'   => array(),
@@ -344,14 +344,14 @@ function formward_field_api_key() {
 			<?php
 			printf(
 				/* translators: %s: masked API key */
-				wp_kses( __( 'Saved key: <code>%s</code>. Leave the field blank to keep it.', 'formward' ), array( 'code' => array() ) ),
+				wp_kses( __( 'Saved key: <code>%s</code>. Leave the field blank to keep it.', 'formward-forms' ), array( 'code' => array() ) ),
 				esc_html( $masked )
 			);
 			?>
 		</p>
 		<label for="formward_api_key_clear">
 			<input type="checkbox" id="formward_api_key_clear" name="formward_api_key_clear" value="1" />
-			<?php esc_html_e( 'Clear the saved API key', 'formward' ); ?>
+			<?php esc_html_e( 'Clear the saved API key', 'formward-forms' ); ?>
 		</label>
 		<?php
 	}
@@ -374,7 +374,7 @@ function formward_field_app_base() {
 		placeholder="<?php echo esc_attr( FORMWARD_DEFAULT_APP_BASE ); ?>"
 	/>
 	<p class="description">
-		<?php esc_html_e( 'Optional. The Formward app host that serves the REST API. Leave as the default unless Formward gave you a custom one. The plugin calls <base>/api/v1/forms.', 'formward' ); ?>
+		<?php esc_html_e( 'Optional. The Formward app host that serves the REST API. Leave as the default unless Formward gave you a custom one. The plugin calls <base>/api/v1/forms.', 'formward-forms' ); ?>
 	</p>
 	<?php
 }
@@ -434,7 +434,7 @@ function formward_api_get( $path, $query = array() ) {
 	if ( '' === $api_key ) {
 		return new WP_Error(
 			'formward_no_key',
-			__( 'No Formward API key is configured. Add one under Settings → Formward.', 'formward' )
+			__( 'No Formward API key is configured. Add one under Settings → Formward.', 'formward-forms' )
 		);
 	}
 
@@ -464,11 +464,11 @@ function formward_api_get( $path, $query = array() ) {
 	$json = json_decode( $body, true );
 
 	if ( $code < 200 || $code >= 300 ) {
-		$message = __( 'The Formward API returned an error.', 'formward' );
+		$message = __( 'The Formward API returned an error.', 'formward-forms' );
 		if ( is_array( $json ) && isset( $json['error']['message'] ) && is_string( $json['error']['message'] ) ) {
 			$message = $json['error']['message'];
 		} elseif ( 401 === $code || 403 === $code ) {
-			$message = __( 'Authentication failed. Check that your API key is valid and has the right scopes.', 'formward' );
+			$message = __( 'Authentication failed. Check that your API key is valid and has the right scopes.', 'formward-forms' );
 		}
 		return new WP_Error( 'formward_http_' . $code, $message, array( 'status' => $code ) );
 	}
@@ -476,7 +476,7 @@ function formward_api_get( $path, $query = array() ) {
 	if ( ! is_array( $json ) || ! isset( $json['data'] ) || ! is_array( $json['data'] ) ) {
 		return new WP_Error(
 			'formward_bad_response',
-			__( 'Unexpected response from the Formward API.', 'formward' )
+			__( 'Unexpected response from the Formward API.', 'formward-forms' )
 		);
 	}
 
@@ -495,8 +495,8 @@ function formward_api_get( $path, $query = array() ) {
  */
 function formward_add_admin_menu() {
 	add_menu_page(
-		__( 'Formward', 'formward' ),
-		__( 'Formward', 'formward' ),
+		__( 'Formward', 'formward-forms' ),
+		__( 'Formward', 'formward-forms' ),
 		'manage_options',
 		'formward-forms',
 		'formward_render_forms_page',
@@ -506,8 +506,8 @@ function formward_add_admin_menu() {
 
 	add_submenu_page(
 		'formward-forms',
-		__( 'Forms', 'formward' ),
-		__( 'Forms', 'formward' ),
+		__( 'Forms', 'formward-forms' ),
+		__( 'Forms', 'formward-forms' ),
 		'manage_options',
 		'formward-forms',
 		'formward_render_forms_page'
@@ -515,8 +515,8 @@ function formward_add_admin_menu() {
 
 	add_submenu_page(
 		'formward-forms',
-		__( 'Submissions', 'formward' ),
-		__( 'Submissions', 'formward' ),
+		__( 'Submissions', 'formward-forms' ),
+		__( 'Submissions', 'formward-forms' ),
 		'manage_options',
 		'formward-submissions',
 		'formward_render_submissions_page'
@@ -537,7 +537,7 @@ function formward_render_missing_key_notice() {
 			echo wp_kses(
 				sprintf(
 					/* translators: %s: settings page URL */
-					__( 'No Formward API key is set. <a href="%s">Add one under Settings → Formward</a> to list your forms and submissions here.', 'formward' ),
+					__( 'No Formward API key is set. <a href="%s">Add one under Settings → Formward</a> to list your forms and submissions here.', 'formward-forms' ),
 					esc_url( admin_url( 'options-general.php?page=formward' ) )
 				),
 				array( 'a' => array( 'href' => array() ) )
@@ -574,7 +574,7 @@ function formward_render_forms_page() {
 	}
 	?>
 	<div class="wrap">
-		<h1><?php esc_html_e( 'Formward — Forms', 'formward' ); ?></h1>
+		<h1><?php esc_html_e( 'Formward Forms', 'formward-forms' ); ?></h1>
 	<?php
 	if ( '' === formward_get_api_key() ) {
 		formward_render_missing_key_notice();
@@ -590,18 +590,18 @@ function formward_render_forms_page() {
 	}
 
 	if ( empty( $forms ) ) {
-		echo '<p>' . esc_html__( 'No forms found on this account yet. Create one in the Formward dashboard.', 'formward' ) . '</p></div>';
+		echo '<p>' . esc_html__( 'No forms found on this account yet. Create one in the Formward dashboard.', 'formward-forms' ) . '</p></div>';
 		return;
 	}
 	?>
-		<p class="description"><?php esc_html_e( 'These are the forms on your Formward account. Copy a Form ID to use it in the [formward_form] shortcode or as the default Form ID.', 'formward' ); ?></p>
+		<p class="description"><?php esc_html_e( 'These are the forms on your Formward account. Copy a Form ID to use it in the [formward_form] shortcode or as the default Form ID.', 'formward-forms' ); ?></p>
 		<table class="widefat striped">
 			<thead>
 				<tr>
-					<th scope="col"><?php esc_html_e( 'Name', 'formward' ); ?></th>
-					<th scope="col"><?php esc_html_e( 'Form ID', 'formward' ); ?></th>
-					<th scope="col"><?php esc_html_e( 'Created', 'formward' ); ?></th>
-					<th scope="col"><?php esc_html_e( 'Submissions', 'formward' ); ?></th>
+					<th scope="col"><?php esc_html_e( 'Name', 'formward-forms' ); ?></th>
+					<th scope="col"><?php esc_html_e( 'Form ID', 'formward-forms' ); ?></th>
+					<th scope="col"><?php esc_html_e( 'Created', 'formward-forms' ); ?></th>
+					<th scope="col"><?php esc_html_e( 'Submissions', 'formward-forms' ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -622,11 +622,11 @@ function formward_render_forms_page() {
 				);
 				?>
 				<tr>
-					<td><?php echo esc_html( '' !== $form_name ? $form_name : __( '(untitled)', 'formward' ) ); ?></td>
+					<td><?php echo esc_html( '' !== $form_name ? $form_name : __( '(untitled)', 'formward-forms' ) ); ?></td>
 					<td><code><?php echo esc_html( $form_id ); ?></code></td>
 					<td><?php echo esc_html( $created ); ?></td>
 					<td>
-						<a href="<?php echo esc_url( $subs_url ); ?>"><?php esc_html_e( 'View submissions', 'formward' ); ?></a>
+						<a href="<?php echo esc_url( $subs_url ); ?>"><?php esc_html_e( 'View submissions', 'formward-forms' ); ?></a>
 					</td>
 				</tr>
 			<?php endforeach; ?>
@@ -709,7 +709,7 @@ function formward_render_submissions_page() {
 	}
 	?>
 	<div class="wrap">
-		<h1><?php esc_html_e( 'Formward — Submissions', 'formward' ); ?></h1>
+		<h1><?php esc_html_e( 'Formward Submissions', 'formward-forms' ); ?></h1>
 	<?php
 	if ( '' === formward_get_api_key() ) {
 		formward_render_missing_key_notice();
@@ -747,7 +747,7 @@ function formward_render_submissions_page() {
 	?>
 		<form method="get" action="<?php echo esc_url( admin_url( 'admin.php' ) ); ?>">
 			<input type="hidden" name="page" value="formward-submissions" />
-			<label for="formward-form-select"><strong><?php esc_html_e( 'Form:', 'formward' ); ?></strong></label>
+			<label for="formward-form-select"><strong><?php esc_html_e( 'Form:', 'formward-forms' ); ?></strong></label>
 			<select name="form_id" id="formward-form-select">
 			<?php foreach ( $forms as $form ) : ?>
 				<?php
@@ -760,11 +760,11 @@ function formward_render_submissions_page() {
 				<option value="<?php echo esc_attr( $fid ); ?>" <?php selected( $selected, $fid ); ?>><?php echo esc_html( $fname ); ?></option>
 			<?php endforeach; ?>
 			</select>
-			<?php submit_button( __( 'Show submissions', 'formward' ), 'secondary', '', false ); ?>
+			<?php submit_button( __( 'Show submissions', 'formward-forms' ), 'secondary', '', false ); ?>
 		</form>
 	<?php
 	if ( '' === $selected ) {
-		echo '<p>' . esc_html__( 'No forms available. Create one in the Formward dashboard first.', 'formward' ) . '</p></div>';
+		echo '<p>' . esc_html__( 'No forms available. Create one in the Formward dashboard first.', 'formward-forms' ) . '</p></div>';
 		return;
 	}
 
@@ -777,7 +777,7 @@ function formward_render_submissions_page() {
 
 	$table = new Formward_Submissions_List_Table( is_array( $submissions ) ? $submissions : array() );
 	$table->prepare_items();
-	echo '<h2 class="screen-reader-text">' . esc_html__( 'Recent submissions', 'formward' ) . '</h2>';
+	echo '<h2 class="screen-reader-text">' . esc_html__( 'Recent submissions', 'formward-forms' ) . '</h2>';
 	$table->display();
 	?>
 	</div>
@@ -838,10 +838,10 @@ function formward_load_list_table() {
 		 */
 		public function get_columns() {
 			return array(
-				'created' => __( 'Received', 'formward' ),
-				'status'  => __( 'Status', 'formward' ),
-				'preview' => __( 'Preview', 'formward' ),
-				'spam'    => __( 'Spam', 'formward' ),
+				'created' => __( 'Received', 'formward-forms' ),
+				'status'  => __( 'Status', 'formward-forms' ),
+				'preview' => __( 'Preview', 'formward-forms' ),
+				'spam'    => __( 'Spam', 'formward-forms' ),
 			);
 		}
 
@@ -862,7 +862,7 @@ function formward_load_list_table() {
 		 * @return void
 		 */
 		public function no_items() {
-			esc_html_e( 'No submissions found for this form yet.', 'formward' );
+			esc_html_e( 'No submissions found for this form yet.', 'formward-forms' );
 		}
 
 		/**
@@ -897,7 +897,7 @@ function formward_load_list_table() {
 			$payload = isset( $item['payload'] ) ? $item['payload'] : array();
 			$preview = formward_payload_preview( $payload );
 			if ( '' === $preview ) {
-				return '<span class="description">' . esc_html__( '(empty)', 'formward' ) . '</span>';
+				return '<span class="description">' . esc_html__( '(empty)', 'formward-forms' ) . '</span>';
 			}
 			return esc_html( $preview );
 		}
@@ -945,16 +945,16 @@ function formward_render_settings_page() {
 		<form action="options.php" method="post">
 			<?php
 			settings_fields( 'formward_settings' );
-			do_settings_sections( 'formward' );
+			do_settings_sections( 'formward-forms' );
 			submit_button();
 			?>
 		</form>
 		<hr />
-		<h2><?php esc_html_e( 'Using the shortcode', 'formward' ); ?></h2>
+		<h2><?php esc_html_e( 'Using the shortcode', 'formward-forms' ); ?></h2>
 		<p>
 			<?php
 			echo wp_kses(
-				__( 'Insert <code>[formward_form]</code> to render a contact form using your default Form ID.', 'formward' ),
+				__( 'Insert <code>[formward_form]</code> to render a contact form using your default Form ID.', 'formward-forms' ),
 				array( 'code' => array() )
 			);
 			?>
@@ -962,18 +962,18 @@ function formward_render_settings_page() {
 		<p>
 			<?php
 			echo wp_kses(
-				__( 'Override per form: <code>[formward_form id="abc123" redirect_url="/thank-you"]</code>.', 'formward' ),
+				__( 'Override per form: <code>[formward_form id="abc123" redirect_url="/thank-you"]</code>.', 'formward-forms' ),
 				array( 'code' => array() )
 			);
 			?>
 		</p>
-		<h2><?php esc_html_e( 'Browse your account', 'formward' ); ?></h2>
+		<h2><?php esc_html_e( 'Browse your account', 'formward-forms' ); ?></h2>
 		<p>
 			<?php
 			echo wp_kses(
 				sprintf(
 					/* translators: 1: Forms page URL, 2: Submissions page URL */
-					__( 'With an API key set, use <a href="%1$s">Formward → Forms</a> to copy a Form ID and <a href="%2$s">Formward → Submissions</a> to view recent submissions, read-only, inside WP admin.', 'formward' ),
+					__( 'With an API key set, use <a href="%1$s">Formward → Forms</a> to copy a Form ID and <a href="%2$s">Formward → Submissions</a> to view recent submissions, read-only, inside WP admin.', 'formward-forms' ),
 					esc_url( admin_url( 'admin.php?page=formward-forms' ) ),
 					esc_url( admin_url( 'admin.php?page=formward-submissions' ) )
 				),
@@ -995,7 +995,7 @@ function formward_plugin_action_links( $links ) {
 	$settings_link = sprintf(
 		'<a href="%s">%s</a>',
 		esc_url( admin_url( 'options-general.php?page=formward' ) ),
-		esc_html__( 'Settings', 'formward' )
+		esc_html__( 'Settings', 'formward-forms' )
 	);
 	array_unshift( $links, $settings_link );
 
@@ -1024,7 +1024,7 @@ function formward_shortcode( $atts ) {
 		array(
 			'id'           => '',
 			'redirect_url' => '',
-			'button'       => __( 'Send message', 'formward' ),
+			'button'       => __( 'Send message', 'formward-forms' ),
 			'class'        => '',
 		),
 		$atts,
@@ -1042,7 +1042,7 @@ function formward_shortcode( $atts ) {
 		if ( current_user_can( 'manage_options' ) ) {
 			return '<p class="formward-notice">' . esc_html__(
 				'Formward: set a default Form ID under Settings → Formward, or pass id="…" to the shortcode.',
-				'formward'
+				'formward-forms'
 			) . '</p>';
 		}
 
@@ -1076,7 +1076,7 @@ function formward_shortcode( $atts ) {
 
 		<?php /* Honeypot: must stay empty. Hidden off-screen, not display:none. */ ?>
 		<div class="formward-gotcha" aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
-			<label for="<?php echo esc_attr( $uid ); ?>-gotcha"><?php esc_html_e( 'Leave this field empty', 'formward' ); ?></label>
+			<label for="<?php echo esc_attr( $uid ); ?>-gotcha"><?php esc_html_e( 'Leave this field empty', 'formward-forms' ); ?></label>
 			<input
 				type="text"
 				id="<?php echo esc_attr( $uid ); ?>-gotcha"
@@ -1087,7 +1087,7 @@ function formward_shortcode( $atts ) {
 		</div>
 
 		<p class="formward-field">
-			<label for="<?php echo esc_attr( $uid ); ?>-name"><?php esc_html_e( 'Name', 'formward' ); ?></label>
+			<label for="<?php echo esc_attr( $uid ); ?>-name"><?php esc_html_e( 'Name', 'formward-forms' ); ?></label>
 			<input
 				type="text"
 				id="<?php echo esc_attr( $uid ); ?>-name"
@@ -1098,7 +1098,7 @@ function formward_shortcode( $atts ) {
 		</p>
 
 		<p class="formward-field">
-			<label for="<?php echo esc_attr( $uid ); ?>-email"><?php esc_html_e( 'Email', 'formward' ); ?></label>
+			<label for="<?php echo esc_attr( $uid ); ?>-email"><?php esc_html_e( 'Email', 'formward-forms' ); ?></label>
 			<input
 				type="email"
 				id="<?php echo esc_attr( $uid ); ?>-email"
@@ -1109,7 +1109,7 @@ function formward_shortcode( $atts ) {
 		</p>
 
 		<p class="formward-field">
-			<label for="<?php echo esc_attr( $uid ); ?>-message"><?php esc_html_e( 'Message', 'formward' ); ?></label>
+			<label for="<?php echo esc_attr( $uid ); ?>-message"><?php esc_html_e( 'Message', 'formward-forms' ); ?></label>
 			<textarea
 				id="<?php echo esc_attr( $uid ); ?>-message"
 				name="message"

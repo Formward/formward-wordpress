@@ -2,9 +2,9 @@
 Contributors: formward
 Tags: contact form, forms, gdpr, eu hosting, privacy
 Requires at least: 5.8
-Tested up to: 6.8
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.2.0
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ EU-hosted, GDPR-clean contact forms for WordPress. Submissions are processed on 
 
 == Description ==
 
-Formward Forms adds a plug-and-play contact form to your WordPress site, backed by [Formward](https://formward.eu) — a European form backend hosted in Sweden.
+Formward Forms adds a plug-and-play contact form to your WordPress site, backed by [Formward](https://formward.eu), a European form backend hosted in Sweden.
 
 Drop the `[formward_form]` shortcode on any page or post and it renders an accessible HTML contact form (name, email, message) that posts directly to your Formward endpoint. Your submissions land in the Formward dashboard, with email notifications, spam filtering, and a full export and erasure trail.
 
@@ -30,7 +30,7 @@ Drop the `[formward_form]` shortcode on any page or post and it renders an acces
 * Optional redirect to your own thank-you page after submit.
 * Per-form overrides: use one default Form ID, or pass a different `id` per shortcode.
 * **Forms list in WP admin.** Paste a read-only API key and the **Formward → Forms** screen lists every form on your account with its Form ID, so you can copy an ID without leaving WordPress.
-* **Submissions viewer.** **Formward → Submissions** shows recent submissions for any form in a sortable WordPress list table (received date, status, and a compact preview of the payload). Read-only — nothing is changed or deleted.
+* **Submissions viewer.** **Formward → Submissions** shows recent submissions for any form in a sortable WordPress list table (received date, status, and a compact preview of the payload). Read-only: nothing is changed or deleted.
 
 This plugin is a thin, open-source client. It stores only your Form ID, endpoint base, and an optional read-only API key in the WordPress options table. It does not phone home and adds no tracking scripts.
 
@@ -74,6 +74,11 @@ Yes, a free Formward account. The free plan includes 100 submissions per month. 
 No. The plugin outputs a plain HTML form. There are no analytics or marketing scripts.
 
 == Changelog ==
+
+= 0.2.1 =
+* Text domain is now formward-forms, matching the plugin slug in the WordPress.org directory.
+* Plugin URI points at the WordPress guide on formward.eu.
+* Tested with WordPress 7.1.
 
 = 0.2.0 =
 * Added a **Formward API key** setting (read-only key, stored via the options API and shown masked) alongside an optional API base URL.

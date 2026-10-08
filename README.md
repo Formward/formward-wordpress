@@ -32,26 +32,26 @@ Submissions are processed on servers in Sweden; submitter IP addresses are pseud
 
 | File | Purpose |
 | --- | --- |
-| `formward.php` | Main plugin: header, settings page, `[formward_form]` shortcode, admin pages. |
+| `formward-forms.php` | Main plugin: header, settings page, `[formward_form]` shortcode, admin pages. |
 | `readme.txt` | WordPress.org-format readme (shown on the plugin directory page). |
 | `README.md` | This developer note. |
 
 ## Packaging for WordPress.org
 
-WordPress expects the plugin files inside a folder named after the slug (`formward`):
+WordPress expects the plugin files inside a folder named after the slug (`formward-forms`):
 
 ```bash
-mkdir -p build/formward
-cp formward.php readme.txt build/formward/
-cd build && zip -r formward.zip formward
+mkdir -p build/formward-forms
+cp formward-forms.php readme.txt build/formward-forms/
+cd build && zip -r formward-forms.zip formward-forms
 ```
 
-Do not include `README.md` in the ZIP. Bump the version in both the plugin header (`Version:` in `formward.php`) and `readme.txt` (`Stable tag:`) for each release, and add a `== Changelog ==` entry.
+Do not include `README.md` in the ZIP. Bump the version in both the plugin header (`Version:` in `formward-forms.php`) and `readme.txt` (`Stable tag:`) for each release, and add a `== Changelog ==` entry.
 
 ## Local testing
 
 ```bash
-php -l formward.php
+php -l formward-forms.php
 ```
 
 For an integration test, drop the `formward` folder into a local WordPress install's `wp-content/plugins/`, activate it, set a Form ID under **Settings, Formward**, and place `[formward_form]` on a page.
